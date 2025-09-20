@@ -1,0 +1,15 @@
+alter table Katalog
+alter column OKPO varchar(30) not null     # alter bn katalogga uzgartirish kiritildi, okpo pustoy bulmasin degan
+
+
+add constraint PK_OKPO primary key (OKPO)      # okpoga klyuch quyadi yani bogliydigan key
+
+  
+insert into Katalog values(1234567,98765321,'Uzavto')    # katalogga malumot kiritilyapti
+insert into Pervichka values(1234567,98765321,1000)      # pervichkaga malumot kiritilyapti
+
+  
+create table Pervichka (OKPO varchar(30) foreign key references Katalog (OKPO),INN varchar(30),Hisobot_Oyi int)     # tablitsa
+
+
+  select count(distinct OKPO),count(*)from Katalog    ### OKPOni sanaydi katalogdagi
