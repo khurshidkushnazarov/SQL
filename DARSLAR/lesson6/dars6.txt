@@ -1,0 +1,97 @@
+select * into Products from [stat02_lesson04].[dbo].[Products]            ###  stat02_lesson04 dan  Products   degan tableni    stat02_lesson06 olib keladi
+
+
+sp_rename 'Products', 'Productlar'                 #### Products degan nomli table ni   Productlar degan nomli table ga uzgartirdi
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+select sum(StockQuantity) from Products            summa
+select avg(StockQuantity) from Products            urtacha
+select max(StockQuantity) from Products            maksimum
+select min(StockQuantity) from Products            minimum
+
+
+a=100
+b=200
+c=0,  c=Null
+d=500
+  
+  urtachasini hisoblaganda agar Null (800/3) bulsa xisobga olmaydi, agar 0 bulsa (800/4)hisobga oladi
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+create table test (id int)
+
+insert into test values (1), (2),(3),(null),(4),(3),(5),(null)
+
+select count(id) from test                  ## null ni xisobga olmay nechta ustun borligini sanaydi (6)
+select count(distinct id) from test         ## takror bulgan ustunni tashab ketadi (5)
+select count(*) from test                   ## Hammasini sanaydi(8)
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+select category, sum(StockQuantity) from Products
+group by category                                         category buyicha summani chiqaradi
+  
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+select * from Products
+
+select category,sum(Price * StockQuantity) as total from Products        ###  group by   dan keyin having ishlatiladi
+group by category
+having sum(Price * StockQuantity) > 20000                                ### 20000 dan katta savdoni topish
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SQL da yozilish tartibi
+
+where
+select
+from
+order by
+group by
+having
+
+
+SQL da ishlash tartibi
+
+from
+where
+group by
+having
+select
+order by
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+select * from city_population
+
+select * from (
+select city,Population, year from city_population) as A
+pivot (max(population) for year in ([2012],[2013])) as pvt
+
+
+ ID City  Population Year
+1	Chilonzor	2500	2012
+2	Yakkasaroy	1500	2012
+3	Mirobod	3000	2012
+4	Yashnobod	1000	2012
+5	Bektemir	2000	2012
+1	Chilonzor	2800	2013
+2	Yakkasaroy	1900	2013
+3	Mirobod	2000	2013
+4	Yashnobod	5000	2013
+5	Bektemir	1500	2013
+
+ city       2012  2013
+Bektemir	2000	1500
+Chilonzor	2500	2800
+Mirobod	3000	2000
+Yakkasaroy	1500	1900
+Yashnobod	1000	5000
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  
+  
