@@ -1,0 +1,125 @@
+select * from Test1
+inner join Test2
+on Test1.id = Test2.id      ### Test1 yoniga Test2 da borini quyib beradi (ВПР),    Test1 left  Test2 right hisoblanadi   
+-----------------------------------------------------------------------------------------------------------------------------
+ ----left 
+select * from Test1
+left join Test2
+on Test1.id = Test2.id     #### Test1 ni xammasini chiqaradi, test1 da yukini yoniga NULL quyadi nomalum degani
+
+-----------------------------------------------------------------------------------------------------------------------------
+----right 
+select * from Test1
+right join Test2
+on Test1.id = Test2.id  ##### Test2 ni xammasini chiqaradi, test2 da yukini yoniga NULL quyadi nomalum degani
+                           
+------------------------------------------------------------------------------------------------------------------------
+  
+----full 
+select * from Test1
+full join Test2
+on Test1.id = Test2.id       ## tulik hammasini oladi Test1 va Test2 dagini
+
+-----------------------------------------------------------------------------------------------------------------------
+
+  
+----cross 
+select * from Test1
+cross join Test2          har bittasini yoniga birma bir quyib chiqadi
+
+-------------------------------------------------------------------------------------------------------------------------
+  
+create table Employee (EmployeeID int, Name varchar(30),ManagerID int)
+
+insert into Employee values 
+	(1,'Hamraev',null),
+	(2,'Ziyayev',1),
+	(3,'Mahammadiyev',1),
+	(4,'Mamur',2),
+	(5,'Dilshod',3),
+	(6,'Xurshid',4),
+	(7,'Kamoliddin',5)
+
+select * from Employee
+
+
+select 
+employee.Name as employee, 
+isnull(manager.name,'No manager') as manager
+from Employee as employee
+left join Employee as manager
+on Employee.ManagerID = manager.EmployeeID                                  Ishchini yoniga raxbarini tortiw
+
+  ------------------------------------------------------------------------------------------------------------------------------------
+
+select * from Customers
+select * from FactSales
+
+
+select
+		top 5 FirstName,
+		sum(SalesAmount) as totalsales from Customers as C
+inner join FactSales as F
+on C.CustomerID = F.CustomerID
+group by FirstName
+order by totalsales desc                                      #### kup savdo qilgan 5 customerni topish
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+              exar bir etap buyicha 
+
+      ----1 step
+select * from Customers as C
+inner join FactSales as F
+on C.CustomerID = F.CustomerID
+
+---2-step
+
+select
+		FirstName,sum(SalesAmount) as totalsales from Customers as C
+inner join FactSales as F
+on C.CustomerID = F.CustomerID
+group by FirstName
+
+
+---3-step
+
+select
+		top 5 FirstName,
+		sum(SalesAmount) as totalsales from Customers as C
+inner join FactSales as F
+on C.CustomerID = F.CustomerID
+group by FirstName
+order by totalsales desc
+
+--------------------------------------------------------------------------------------------------------------------------------------
+select * from Customers
+select * from FactSales
+
+select FirstName,SalesAmount  from Customers
+left join FactSales
+on Customers.CustomerID = FactSales.CustomerID
+where SalesAmount is Null                                              ####  savdo qilmaganlarni chiqarish
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
