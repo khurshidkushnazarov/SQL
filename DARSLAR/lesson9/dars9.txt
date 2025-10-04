@@ -1,0 +1,33 @@
+
+
+create database stat02_lesson9
+use stat02_lesson9
+
+
+create table family (id int,name varchar(25),parentid int)
+insert into family values (1,'Grandfather',NULL),(2,'Father',1),
+(3,'Uncle',1),(4,'Me',2),(5,'My Son',4),(6,'Cousin',3),(7,'Cousin son',6)
+
+select * from family
+
+
+
+select 
+child.name as child,parent.name as parent
+from family as child
+left join family as parent
+on child.parentid = parent.id                              bu erda qaysi birini otasi kim quyib beradi
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+select 
+child.name as child,                                #child deb ustun yaratib beradi
+parent.name as parent,                           #parent deb ustun yaratib beradi
+grandparent.name as grandparent                 #grandparent deb ustun yaratib beradi
+from family as child
+left join family as parent
+on child.parentid = parent.id
+left join family as grandparent
+on parent.parentid = grandparent.id                         bu erda kimni otasi granfater i kim shuni kuyib beradi
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------
